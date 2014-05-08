@@ -2,7 +2,7 @@ About
 ======
 
 `muni` is a simple NextBus API Client library and command line tool for retrieving 
-San Francisco Muni bus route and stop prediction information.
+NextBus route and stop prediction information.
 
 Install
 =======
@@ -18,6 +18,9 @@ Usage
 ------
 
 ```ruby
+# Set NextBus agency (default 'sf-muni')
+Muni::Base.set_agency('art')
+
 # Find all routes.
 Muni::Route.find(:all)
 # => [<Muni::Route tag="F" title="F-Market & Wharves">, ...]

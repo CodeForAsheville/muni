@@ -4,6 +4,10 @@ module Muni
   class NextBusError < StandardError; end
   class Base < OpenStruct
     class << self
+      def set_agency(agency_tag)
+        @@agency_tag = agency_tag.to_s
+      end
+      
       private
 
       def fetch(command, options = {})
@@ -15,7 +19,8 @@ module Muni
       end
 
       def build_url(command, options = {})
-        url = "http://webservices.nextbus.com/service/publicXMLFeed?command=#{command}&a=sf-muni"
+        agency = @@agency_tag || 'sf-muni'
+        url = "http://webservices.nextbus.com/service/publicXMLFeed?command=#{command}&a=#{agency}"
         options.each { |key,value| url << "&#{key}=#{value}" }
         url
       end
